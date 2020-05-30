@@ -11,3 +11,16 @@ C:\RenataSafarova\VisualStudio\DOSz\bin\Debug\netcoreapp3.1\DOSz.pdb
 C:\RenataSafarova\VisualStudio\DOSz\obj\Debug\netcoreapp3.1\DOSz.dll
 C:\RenataSafarova\VisualStudio\DOSz\obj\Debug\netcoreapp3.1\DOSz.pdb
 C:\RenataSafarova\VisualStudio\DOSz\obj\Debug\netcoreapp3.1\DOSz.genruntimeconfig.cache
+C:\Users\79507\Documents\GitHub\TeamZ\DOS_Z\bin\Debug\netcoreapp3.1\DOSz.exe
+C:\Users\79507\Documents\GitHub\TeamZ\DOS_Z\bin\Debug\netcoreapp3.1\DOSz.deps.json
+C:\Users\79507\Documents\GitHub\TeamZ\DOS_Z\bin\Debug\netcoreapp3.1\DOSz.runtimeconfig.json
+C:\Users\79507\Documents\GitHub\TeamZ\DOS_Z\bin\Debug\netcoreapp3.1\DOSz.runtimeconfig.dev.json
+C:\Users\79507\Documents\GitHub\TeamZ\DOS_Z\bin\Debug\netcoreapp3.1\DOSz.dll
+C:\Users\79507\Documents\GitHub\TeamZ\DOS_Z\bin\Debug\netcoreapp3.1\DOSz.pdb
+C:\Users\79507\Documents\GitHub\TeamZ\DOS_Z\obj\Debug\netcoreapp3.1\DOSz.csprojAssemblyReference.cache
+C:\Users\79507\Documents\GitHub\TeamZ\DOS_Z\obj\Debug\netcoreapp3.1\DOSz.AssemblyInfoInputs.cache
+C:\Users\79507\Documents\GitHub\TeamZ\DOS_Z\obj\Debug\netcoreapp3.1\DOSz.AssemblyInfo.cs
+C:\Users\79507\Documents\GitHub\TeamZ\DOS_Z\obj\Debug\netcoreapp3.1\DOSz.csproj.CoreCompileInputs.cache
+C:\Users\79507\Documents\GitHub\TeamZ\DOS_Z\obj\Debug\netcoreapp3.1\DOSz.dll
+C:\Users\79507\Documents\GitHub\TeamZ\DOS_Z\obj\Debug\netcoreapp3.1\DOSz.pdb
+C:\Users\79507\Documents\GitHub\TeamZ\DOS_Z\obj\Debug\netcoreapp3.1\DOSz.genruntimeconfig.cache

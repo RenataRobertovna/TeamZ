@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\RenataSafarova\\VisualStudio\\DOSz\\DOSz.csproj": {}
+    "C:\\Users\\79507\\Documents\\GitHub\\TeamZ\\DOS_Z\\DOSz.csproj": {}
   },
   "projects": {
-    "C:\\RenataSafarova\\VisualStudio\\DOSz\\DOSz.csproj": {
+    "C:\\Users\\79507\\Documents\\GitHub\\TeamZ\\DOS_Z\\DOSz.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\RenataSafarova\\VisualStudio\\DOSz\\DOSz.csproj",
+        "projectUniqueName": "C:\\Users\\79507\\Documents\\GitHub\\TeamZ\\DOS_Z\\DOSz.csproj",
         "projectName": "DOSz",
-        "projectPath": "C:\\RenataSafarova\\VisualStudio\\DOSz\\DOSz.csproj",
-        "packagesPath": "C:\\Users\\acer\\.nuget\\packages\\",
-        "outputPath": "C:\\RenataSafarova\\VisualStudio\\DOSz\\obj\\",
+        "projectPath": "C:\\Users\\79507\\Documents\\GitHub\\TeamZ\\DOS_Z\\DOSz.csproj",
+        "packagesPath": "C:\\Users\\79507\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\79507\\Documents\\GitHub\\TeamZ\\DOS_Z\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\79507\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -47,12 +47,18 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.2, 3.1.2]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
         }
       }
     }
