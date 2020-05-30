@@ -9,6 +9,7 @@ namespace DOS_Z
     {
         static void Main(string[] args)
         {
+<<<<<<< HEAD
             Dictionary<int, string> catalogs = new Dictionary<int, string>();
             DriveInfo[] drivers = DriveInfo.GetDrives();     // получаем диски
             int i = 1;
@@ -22,6 +23,9 @@ namespace DOS_Z
                     i++;
                 }
             }
+=======
+            WriteLine("Введите номер диска");
+>>>>>>> master
             int numberRoot = Convert.ToInt32(ReadLine());
 
             string path = "";   // получение пути к диску по его порядковому номеру

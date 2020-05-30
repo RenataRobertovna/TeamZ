@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "G0CUCuYuVEMGZHv9sKop2T4b3rUvf+TB9AaZRH/vggHYMHTiIdpkM8PjObucF8p/Xuz+8EkP1SSDpRutYiN8Yw==",
   "success": true,
   "projectFilePath": "C:\\RenataSafarova\\Git\\TeamZ\\DOS_Z\\DOS_Z\\DOS_Z.csproj",
+=======
+  "dgSpecHash": "MPRzMEb/vQRLN8vCPjtN2np9abLDBEYb7/RPMUWaxfk6hkhK312LkfUNWbzboUPgxDIMgv/Ws5jpSKkFs2qwMg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Яша\\Documents\\GitHub\\TeamZ\\DOS_Z\\DOS_Z\\DOS_Z.csproj",
+>>>>>>> master
   "expectedPackageFiles": [],
   "logs": []
 }

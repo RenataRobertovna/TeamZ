@@ -10,6 +10,7 @@ namespace DOS_Z
     {
         private Dictionary<int, string> catalogs;
         private Dictionary<int, string> files;
+<<<<<<< HEAD
         private Dictionary<int, string> catalogsName;
         private Dictionary<int, string> filesName;
         private string CurrentPath;
@@ -90,17 +91,31 @@ namespace DOS_Z
             CurrentPath = "Список дисков!";
             int i = 1;
             foreach (var driver in drivers) // проходимся по дискам
+=======
+
+        private DriveInfo[] drivers;
+
+        public DirectoryInfo()
+        {
+            drivers = DriveInfo.GetDrives();     // получаем диски
+            int i = 1;
+            foreach (var driver in drivers)                  // проходимся по дискам
+>>>>>>> master
             {
                 if (driver.IsReady)
                 {
                     //Для выбора к какому диску перейти
                     WriteLine($"{i}. - { driver.Name }");
                     catalogs.Add(i, driver.RootDirectory.ToString()); // добавляем в дикшионари порядковый номер диска и его путь
+<<<<<<< HEAD
                     catalogsName.Add(i, driver.Name);
+=======
+>>>>>>> master
                     i++;
                 }
             }
         }
+<<<<<<< HEAD
     }
 }
 /*
@@ -131,3 +146,9 @@ Console.WriteLine($"Полное название каталога: {dirInfo.Ful
 Console.WriteLine($"Время создания каталога: {dirInfo.CreationTime}");
 Console.WriteLine($"Корневой каталог: {dirInfo.Root}");
 */
+=======
+
+    }
+}
+
+>>>>>>> master
