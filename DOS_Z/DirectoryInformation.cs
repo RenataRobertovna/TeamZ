@@ -1,29 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
+using System.Text;
 using static System.Console;
-
-namespace DOS_Z
+namespace DOSz
 {
     class DirectoryInformation
     {
         private Dictionary<int, string> catalogs;
         private Dictionary<int, string> files;
-<<<<<<< HEAD
         private Dictionary<int, string> catalogsName;
         private Dictionary<int, string> filesName;
         private string CurrentPath;
-
         private DriveInfo[] drivers;
-
         public DirectoryInformation()
         {
             catalogs = new Dictionary<int, string>();
             files = new Dictionary<int, string>();
             catalogsName = new Dictionary<int, string>();
             filesName = new Dictionary<int, string>();
-            drivers = DriveInfo.GetDrives();                // получаем диски
+            drivers = DriveInfo.GetDrives(); // получаем диски
             OriginDirictories();
         }
         public void ShowCurrentCatalogs() //показ каталога
@@ -40,10 +36,9 @@ namespace DOS_Z
             {
                 WriteLine($"{keyValue.Key}. - {keyValue.Value}");
             }
-
+            WriteLine();
             WriteLine("Введите номер директории для перехода далее");
             int numberRoot = Convert.ToInt32(ReadLine());
-
             foreach (KeyValuePair<int, string> keyValue in catalogs)     // разбивает дикшиноари "catalog" на пары: Ключ - Значение
             {
                 if (keyValue.Key == numberRoot)  // если ключ равен введённому номеру диска, то
@@ -53,31 +48,37 @@ namespace DOS_Z
             }
             Directories();
         }
-        private void ShowFilesInCatalog() //показ файлов
-        {
-
-        }
-        public void ChangeCurrentCatalog(int num) //переход в следующий каталог
-        {
-
-        }
+        //показ файлов
+        private void ShowFilesInCatalog() { }
+        //переход в следующий каталог
+        public void ChangeCurrentCatalog() { }
         private void Directories()
         {
             try
             {
                 catalogs.Clear();
                 catalogsName.Clear();
-                files.Clear();
+                this.files.Clear();
                 filesName.Clear();
                 int i = 1;
                 string[] dirs = Directory.GetDirectories(CurrentPath);
+                string[] files = Directory.GetFiles(CurrentPath);
                 foreach (string dir in dirs)
                 {
                     DirectoryInfo dirInfo = new DirectoryInfo(dir);
-                    if (Directory.Exists(dir))
                     {
                         catalogs.Add(i, dir);
                         catalogsName.Add(i, dirInfo.Name);
+                        i++;
+                    }
+                }
+                i = 1;
+                foreach (string file in files)
+                {
+                    DirectoryInfo dirInfo = new DirectoryInfo(file);
+                    {
+                        this.files.Add(i, file);
+                        filesName.Add(i, dirInfo.Name);
                         i++;
                     }
                 }
@@ -91,64 +92,16 @@ namespace DOS_Z
             CurrentPath = "Список дисков!";
             int i = 1;
             foreach (var driver in drivers) // проходимся по дискам
-=======
-
-        private DriveInfo[] drivers;
-
-        public DirectoryInfo()
-        {
-            drivers = DriveInfo.GetDrives();     // получаем диски
-            int i = 1;
-            foreach (var driver in drivers)                  // проходимся по дискам
->>>>>>> master
             {
                 if (driver.IsReady)
                 {
                     //Для выбора к какому диску перейти
                     WriteLine($"{i}. - { driver.Name }");
                     catalogs.Add(i, driver.RootDirectory.ToString()); // добавляем в дикшионари порядковый номер диска и его путь
-<<<<<<< HEAD
                     catalogsName.Add(i, driver.Name);
-=======
->>>>>>> master
                     i++;
                 }
             }
         }
-<<<<<<< HEAD
     }
 }
-/*
-string dirName = "C:\\";
- 
-if (Directory.Exists(dirName))
-{
-    Console.WriteLine("Подкаталоги:");
-    string[] dirs = Directory.GetDirectories(dirName);
-    foreach (string s in dirs)
-    {
-        Console.WriteLine(s);
-    }
-    Console.WriteLine();
-    Console.WriteLine("Файлы:");
-    string[] files = Directory.GetFiles(dirName);
-    foreach (string s in files)
-    {
-        Console.WriteLine(s);
-    }
-}
-    tring dirName = "C:\\Program Files";
-
-DirectoryInfo dirInfo = new DirectoryInfo(dirName);
-
-Console.WriteLine($"Название каталога: {dirInfo.Name}");
-Console.WriteLine($"Полное название каталога: {dirInfo.FullName}");
-Console.WriteLine($"Время создания каталога: {dirInfo.CreationTime}");
-Console.WriteLine($"Корневой каталог: {dirInfo.Root}");
-*/
-=======
-
-    }
-}
-
->>>>>>> master

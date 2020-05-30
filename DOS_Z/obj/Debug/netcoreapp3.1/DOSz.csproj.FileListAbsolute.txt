@@ -1,0 +1,13 @@
+C:\RenataSafarova\VisualStudio\DOSz\obj\Debug\netcoreapp3.1\DOSz.csprojAssemblyReference.cache
+C:\RenataSafarova\VisualStudio\DOSz\obj\Debug\netcoreapp3.1\DOSz.csproj.CoreCompileInputs.cache
+C:\RenataSafarova\VisualStudio\DOSz\obj\Debug\netcoreapp3.1\DOSz.AssemblyInfoInputs.cache
+C:\RenataSafarova\VisualStudio\DOSz\obj\Debug\netcoreapp3.1\DOSz.AssemblyInfo.cs
+C:\RenataSafarova\VisualStudio\DOSz\bin\Debug\netcoreapp3.1\DOSz.exe
+C:\RenataSafarova\VisualStudio\DOSz\bin\Debug\netcoreapp3.1\DOSz.deps.json
+C:\RenataSafarova\VisualStudio\DOSz\bin\Debug\netcoreapp3.1\DOSz.runtimeconfig.json
+C:\RenataSafarova\VisualStudio\DOSz\bin\Debug\netcoreapp3.1\DOSz.runtimeconfig.dev.json
+C:\RenataSafarova\VisualStudio\DOSz\bin\Debug\netcoreapp3.1\DOSz.dll
+C:\RenataSafarova\VisualStudio\DOSz\bin\Debug\netcoreapp3.1\DOSz.pdb
+C:\RenataSafarova\VisualStudio\DOSz\obj\Debug\netcoreapp3.1\DOSz.dll
+C:\RenataSafarova\VisualStudio\DOSz\obj\Debug\netcoreapp3.1\DOSz.pdb
+C:\RenataSafarova\VisualStudio\DOSz\obj\Debug\netcoreapp3.1\DOSz.genruntimeconfig.cache

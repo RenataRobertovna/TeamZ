@@ -8,34 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-<<<<<<< HEAD
     "C:\\Users\\acer\\.nuget\\packages\\": {}
-=======
-    "C:\\Users\\Яша\\.nuget\\packages\\": {}
->>>>>>> master
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
-      "projectUniqueName": "C:\\RenataSafarova\\Git\\TeamZ\\DOS_Z\\DOS_Z\\DOS_Z.csproj",
-      "projectName": "DOS_Z",
-      "projectPath": "C:\\RenataSafarova\\Git\\TeamZ\\DOS_Z\\DOS_Z\\DOS_Z.csproj",
+      "projectUniqueName": "C:\\RenataSafarova\\VisualStudio\\DOSz\\DOSz.csproj",
+      "projectName": "DOSz",
+      "projectPath": "C:\\RenataSafarova\\VisualStudio\\DOSz\\DOSz.csproj",
       "packagesPath": "C:\\Users\\acer\\.nuget\\packages\\",
-      "outputPath": "C:\\RenataSafarova\\Git\\TeamZ\\DOS_Z\\DOS_Z\\obj\\",
+      "outputPath": "C:\\RenataSafarova\\VisualStudio\\DOSz\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-      "projectUniqueName": "C:\\Users\\Яша\\Documents\\GitHub\\TeamZ\\DOS_Z\\DOS_Z\\DOS_Z.csproj",
-      "projectName": "DOS_Z",
-      "projectPath": "C:\\Users\\Яша\\Documents\\GitHub\\TeamZ\\DOS_Z\\DOS_Z\\DOS_Z.csproj",
-      "packagesPath": "C:\\Users\\Яша\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Яша\\Documents\\GitHub\\TeamZ\\DOS_Z\\DOS_Z\\obj\\",
-      "projectStyle": "PackageReference",
-      "configFilePaths": [
-        "C:\\Users\\Яша\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> master
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

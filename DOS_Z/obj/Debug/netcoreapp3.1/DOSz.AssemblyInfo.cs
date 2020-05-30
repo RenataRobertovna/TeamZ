@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("DOS_Z")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("DOSz")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("DOS_Z")]
-[assembly: System.Reflection.AssemblyTitleAttribute("DOS_Z")]
+[assembly: System.Reflection.AssemblyProductAttribute("DOSz")]
+[assembly: System.Reflection.AssemblyTitleAttribute("DOSz")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Создано классом WriteCodeFragment MSBuild.
