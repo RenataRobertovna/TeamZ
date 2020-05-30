@@ -13,6 +13,7 @@ namespace DOSz
         private Dictionary<int, string> filesName;
         private List<string> rootDirectories;
         private string CurrentPath;
+        private readonly string RootPath;
         private DriveInfo[] drivers;
         public DirectoryInformation()
         {
@@ -22,6 +23,7 @@ namespace DOSz
             catalogsName = new Dictionary<int, string>();
             filesName = new Dictionary<int, string>();
             drivers = DriveInfo.GetDrives(); // получаем диски
+            RootPath = "Список доступных дисков.";
             OriginDirictories();
         }
         public void ShowCurrentCatalogs() //показ каталога
@@ -90,7 +92,7 @@ namespace DOSz
         {
             try
             {
-                if (!CurrentPath.Equals("Список дисков!"))
+                if (!CurrentPath.Equals(RootPath))
                 {
                     catalogs.Clear();
                     catalogsName.Clear();
@@ -126,7 +128,7 @@ namespace DOSz
         }
         private void OriginDirictories()
         {
-            CurrentPath = "Список дисков!";
+            CurrentPath = RootPath;
             int i = 1;
             catalogs.Clear();
             catalogsName.Clear();
