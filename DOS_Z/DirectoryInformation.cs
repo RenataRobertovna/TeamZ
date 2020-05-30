@@ -13,7 +13,7 @@ namespace DOSz
         private Dictionary<int, string> filesName;
         private List<string> rootDirectories;
         private string CurrentPath;
-        private readonly string RootPath;
+        private string CoppyPath;
         private DriveInfo[] drivers;
         public DirectoryInformation()
         {
@@ -23,7 +23,6 @@ namespace DOSz
             catalogsName = new Dictionary<int, string>();
             filesName = new Dictionary<int, string>();
             drivers = DriveInfo.GetDrives(); // получаем диски
-            RootPath = "Список доступных дисков.";
             OriginDirictories();
         }
         public void ShowCurrentCatalogs() //показ каталога
@@ -55,34 +54,63 @@ namespace DOSz
                 WriteLine($"{keyValue.Key}. - {keyValue.Value}");
             }
             WriteLine();
-            DirectoryInfo dirInfo = new DirectoryInfo(CurrentPath);
-
-            WriteLine("Введите номер директории для перехода далее");
-            int numberRoot = Convert.ToInt32(ReadLine());
-            if (numberRoot == 0)
+            if (Menu.ChooseObject())
             {
-
-                if (dirInfo.Parent != null)
+                string folderPath = "";
+                WriteLine("Введите номер директории для перехода далее или используйте команду");
+                int numberRoot = Convert.ToInt32(ReadLine());
+                if (numberRoot == 0)
                 {
-                    CurrentPath = dirInfo.Parent.FullName;
-                    
-                } else
-                {
-                    OriginDirictories();
-                }
-            }
-            else
-            {
-                foreach (KeyValuePair<int, string> keyValue in catalogs)     // разбивает дикшиноари "catalog" на пары: Ключ - Значение
-                {
-                    if (keyValue.Key == numberRoot)  // если ключ равен введённому номеру диска, то
+                    DirectoryInfo dirInfo = new DirectoryInfo(CurrentPath);
+                    if (dirInfo.Parent != null)
                     {
-                        CurrentPath = keyValue.Value;     // то путь к диску равен Значению
+                        CurrentPath = dirInfo.Parent.FullName;
+
+                    }
+                    else
+                    {
+                        OriginDirictories();
                     }
                 }
+                else
+                {
+                    foreach (KeyValuePair<int, string> keyValue in catalogs)     // разбивает дикшиноари "catalog" на пары: Ключ - Значение
+                    {
+                        if (keyValue.Key == numberRoot)  // если ключ равен введённому номеру диска, то
+                        {
+                            folderPath = keyValue.Value;     // то путь к диску равен Значению
+                        }
+                    }
+                    string command = ReadLine();
+                    if (command.Equals("go"))
+                    {
+                        CurrentPath = folderPath;
+                    }
+                    else if (command.Equals("copy"))
+                    {
+                        CoppyPath = folderPath;
+                    }
+                    else if (command.Equals("delete"))
+                    {
+                        DirectoryInfo dirInfo = new DirectoryInfo(folderPath);
+                        dirInfo.Delete(true);
+                        Console.WriteLine("Каталог удален");
+                    }
+                    else if (command.Equals("create"))
+                    {
+
+                    }
+                    else if (command.Equals("paste"))
+                    {
+                        DirectoryInfo dirInfo = new DirectoryInfo(CoppyPath);
+                        if (dirInfo.Exists && Directory.Exists(CurrentPath) == false)
+                        {
+                            dirInfo.MoveTo(CurrentPath);
+                        }
+                    }
+                }
+                Directories();
             }
-            Directories();
-           
         }
         //показ файлов
         private void ShowFilesInCatalog() { }
@@ -92,7 +120,7 @@ namespace DOSz
         {
             try
             {
-                if (!CurrentPath.Equals(RootPath))
+                if (!CurrentPath.Equals("Список дисков!"))
                 {
                     catalogs.Clear();
                     catalogsName.Clear();
@@ -128,7 +156,7 @@ namespace DOSz
         }
         private void OriginDirictories()
         {
-            CurrentPath = RootPath;
+            CurrentPath = "Список дисков!";
             int i = 1;
             catalogs.Clear();
             catalogsName.Clear();
