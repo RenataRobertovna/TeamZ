@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\RenataSafarova\\VisualStudio\\DOSz\\DOSz.csproj": {}
+    "D:\\Lexus\\GitHub Projects\\TeamZ\\DOS_Z\\DOSz.csproj": {}
   },
   "projects": {
-    "C:\\RenataSafarova\\VisualStudio\\DOSz\\DOSz.csproj": {
+    "D:\\Lexus\\GitHub Projects\\TeamZ\\DOS_Z\\DOSz.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\RenataSafarova\\VisualStudio\\DOSz\\DOSz.csproj",
+        "projectUniqueName": "D:\\Lexus\\GitHub Projects\\TeamZ\\DOS_Z\\DOSz.csproj",
         "projectName": "DOSz",
-        "projectPath": "C:\\RenataSafarova\\VisualStudio\\DOSz\\DOSz.csproj",
-        "packagesPath": "C:\\Users\\acer\\.nuget\\packages\\",
-        "outputPath": "C:\\RenataSafarova\\VisualStudio\\DOSz\\obj\\",
+        "projectPath": "D:\\Lexus\\GitHub Projects\\TeamZ\\DOS_Z\\DOSz.csproj",
+        "packagesPath": "C:\\Users\\villi\\.nuget\\packages\\",
+        "outputPath": "D:\\Lexus\\GitHub Projects\\TeamZ\\DOS_Z\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\villi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -52,7 +52,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

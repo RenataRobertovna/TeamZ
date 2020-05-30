@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using static System.Console;
 namespace DOSz
 {
@@ -11,10 +11,12 @@ namespace DOSz
         private Dictionary<int, string> files;
         private Dictionary<int, string> catalogsName;
         private Dictionary<int, string> filesName;
+        private List<string> rootDirectories;
         private string CurrentPath;
         private DriveInfo[] drivers;
         public DirectoryInformation()
         {
+            rootDirectories = new List<string>();
             catalogs = new Dictionary<int, string>();
             files = new Dictionary<int, string>();
             catalogsName = new Dictionary<int, string>();
@@ -25,28 +27,60 @@ namespace DOSz
         public void ShowCurrentCatalogs() //показ каталога
         {
             Console.Clear();
-            WriteLine($"Текущая директория: ---> { CurrentPath }");
-            WriteLine("___Каталог___");
+            Write($"Текущая директория: ---> ");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            WriteLine($"{ CurrentPath }");
+            Console.ResetColor();
+            WriteLine();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            WriteLine($"{0}. - НАЗАД");
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            WriteLine("--------------Каталоги--------------");
+            WriteLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             foreach (KeyValuePair<int, string> keyValue in catalogsName)
             {
                 WriteLine($"{keyValue.Key}. - {keyValue.Value}");
             }
-            WriteLine("___Файлы___");
+            WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            WriteLine("--------------Файлы--------------");
+            WriteLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             foreach (KeyValuePair<int, string> keyValue in filesName)
             {
                 WriteLine($"{keyValue.Key}. - {keyValue.Value}");
             }
             WriteLine();
+            DirectoryInfo dirInfo = new DirectoryInfo(CurrentPath);
+
             WriteLine("Введите номер директории для перехода далее");
             int numberRoot = Convert.ToInt32(ReadLine());
-            foreach (KeyValuePair<int, string> keyValue in catalogs)     // разбивает дикшиноари "catalog" на пары: Ключ - Значение
+            if (numberRoot == 0)
             {
-                if (keyValue.Key == numberRoot)  // если ключ равен введённому номеру диска, то
+
+                if (dirInfo.Parent != null)
                 {
-                    CurrentPath = keyValue.Value;     // то путь к диску равен Значению
+                    CurrentPath = dirInfo.Parent.FullName;
+                    
+                } else
+                {
+                    OriginDirictories();
+                }
+            }
+            else
+            {
+                foreach (KeyValuePair<int, string> keyValue in catalogs)     // разбивает дикшиноари "catalog" на пары: Ключ - Значение
+                {
+                    if (keyValue.Key == numberRoot)  // если ключ равен введённому номеру диска, то
+                    {
+                        CurrentPath = keyValue.Value;     // то путь к диску равен Значению
+                    }
                 }
             }
             Directories();
+           
         }
         //показ файлов
         private void ShowFilesInCatalog() { }
@@ -56,30 +90,33 @@ namespace DOSz
         {
             try
             {
-                catalogs.Clear();
-                catalogsName.Clear();
-                this.files.Clear();
-                filesName.Clear();
-                int i = 1;
-                string[] dirs = Directory.GetDirectories(CurrentPath);
-                string[] files = Directory.GetFiles(CurrentPath);
-                foreach (string dir in dirs)
+                if (!CurrentPath.Equals("Список дисков!"))
                 {
-                    DirectoryInfo dirInfo = new DirectoryInfo(dir);
+                    catalogs.Clear();
+                    catalogsName.Clear();
+                    this.files.Clear();
+                    filesName.Clear();
+                    int i = 1;
+                    string[] dirs = Directory.GetDirectories(CurrentPath);
+                    string[] files = Directory.GetFiles(CurrentPath);
+                    foreach (string dir in dirs)
                     {
-                        catalogs.Add(i, dir);
-                        catalogsName.Add(i, dirInfo.Name);
-                        i++;
+                        DirectoryInfo dirInfo = new DirectoryInfo(dir);
+                        {
+                            catalogs.Add(i, dir);
+                            catalogsName.Add(i, dirInfo.Name);
+                            i++;
+                        }
                     }
-                }
-                i = 1;
-                foreach (string file in files)
-                {
-                    DirectoryInfo dirInfo = new DirectoryInfo(file);
+                    i = 1;
+                    foreach (string file in files)
                     {
-                        this.files.Add(i, file);
-                        filesName.Add(i, dirInfo.Name);
-                        i++;
+                        DirectoryInfo dirInfo = new DirectoryInfo(file);
+                        {
+                            this.files.Add(i, file);
+                            filesName.Add(i, dirInfo.Name);
+                            i++;
+                        }
                     }
                 }
             }
@@ -91,6 +128,11 @@ namespace DOSz
         {
             CurrentPath = "Список дисков!";
             int i = 1;
+            catalogs.Clear();
+            catalogsName.Clear();
+            files.Clear();
+            filesName.Clear();
+            rootDirectories.Clear();
             foreach (var driver in drivers) // проходимся по дискам
             {
                 if (driver.IsReady)
@@ -99,6 +141,7 @@ namespace DOSz
                     WriteLine($"{i}. - { driver.Name }");
                     catalogs.Add(i, driver.RootDirectory.ToString()); // добавляем в дикшионари порядковый номер диска и его путь
                     catalogsName.Add(i, driver.Name);
+                    rootDirectories.Add(driver.RootDirectory.ToString());
                     i++;
                 }
             }
