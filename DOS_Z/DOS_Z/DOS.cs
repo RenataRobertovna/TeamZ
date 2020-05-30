@@ -22,7 +22,6 @@ namespace DOS_Z
                     i++;
                 }
             }
-            WriteLine("Введите номер диска");
             int numberRoot = Convert.ToInt32(ReadLine());
 
             string path = "";   // получение пути к диску по его порядковому номеру
@@ -38,21 +37,6 @@ namespace DOS_Z
             WriteLine();
             Directories(path);
         }
-        //вывести в отдельный класс
-        static void Directories(string path)
-        {
-            try
-            {
-                string[] dirs = Directory.GetDirectories(path);
-                foreach (string dir in dirs)
-                {
-                    ForegroundColor = ConsoleColor.Gray;
-                    WriteLine(dir);
-                }
-            }
-            catch (UnauthorizedAccessException)
-            {
-            }
-        }
+
     }
 }

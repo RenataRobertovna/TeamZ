@@ -11,3 +11,9 @@ C:\Users\villi\source\repos\DOS_Z\DOS_Z\obj\Debug\netcoreapp3.1\DOS_Z.AssemblyIn
 C:\Users\villi\source\repos\DOS_Z\DOS_Z\obj\Debug\netcoreapp3.1\DOS_Z.dll
 C:\Users\villi\source\repos\DOS_Z\DOS_Z\obj\Debug\netcoreapp3.1\DOS_Z.pdb
 C:\Users\villi\source\repos\DOS_Z\DOS_Z\obj\Debug\netcoreapp3.1\DOS_Z.genruntimeconfig.cache
+C:\RenataSafarova\Git\TeamZ\DOS_Z\DOS_Z\obj\Debug\netcoreapp3.1\DOS_Z.csprojAssemblyReference.cache
+C:\RenataSafarova\Git\TeamZ\DOS_Z\DOS_Z\obj\Debug\netcoreapp3.1\DOS_Z.csproj.CoreCompileInputs.cache
+C:\RenataSafarova\Git\TeamZ\DOS_Z\DOS_Z\obj\Debug\netcoreapp3.1\DOS_Z.AssemblyInfoInputs.cache
+C:\RenataSafarova\Git\TeamZ\DOS_Z\DOS_Z\obj\Debug\netcoreapp3.1\DOS_Z.AssemblyInfo.cs
+C:\RenataSafarova\Git\TeamZ\DOS_Z\DOS_Z\obj\Debug\netcoreapp3.1\DOS_Z.dll
+C:\RenataSafarova\Git\TeamZ\DOS_Z\DOS_Z\obj\Debug\netcoreapp3.1\DOS_Z.pdb

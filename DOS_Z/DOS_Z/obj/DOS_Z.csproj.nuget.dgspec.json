@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\villi\\source\\repos\\DOS_Z\\DOS_Z\\DOS_Z.csproj": {}
+    "C:\\RenataSafarova\\Git\\TeamZ\\DOS_Z\\DOS_Z\\DOS_Z.csproj": {}
   },
   "projects": {
-    "C:\\Users\\villi\\source\\repos\\DOS_Z\\DOS_Z\\DOS_Z.csproj": {
+    "C:\\RenataSafarova\\Git\\TeamZ\\DOS_Z\\DOS_Z\\DOS_Z.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\villi\\source\\repos\\DOS_Z\\DOS_Z\\DOS_Z.csproj",
+        "projectUniqueName": "C:\\RenataSafarova\\Git\\TeamZ\\DOS_Z\\DOS_Z\\DOS_Z.csproj",
         "projectName": "DOS_Z",
-        "projectPath": "C:\\Users\\villi\\source\\repos\\DOS_Z\\DOS_Z\\DOS_Z.csproj",
-        "packagesPath": "C:\\Users\\villi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\villi\\source\\repos\\DOS_Z\\DOS_Z\\obj\\",
+        "projectPath": "C:\\RenataSafarova\\Git\\TeamZ\\DOS_Z\\DOS_Z\\DOS_Z.csproj",
+        "packagesPath": "C:\\Users\\acer\\.nuget\\packages\\",
+        "outputPath": "C:\\RenataSafarova\\Git\\TeamZ\\DOS_Z\\DOS_Z\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\villi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -52,7 +52,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
