@@ -18,5 +18,4 @@ namespace DOSz
             return false;
         }
     }
-    
 }
