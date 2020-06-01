@@ -74,7 +74,6 @@ namespace DOSz
                         if (dirInfo.Parent != null)
                         {
                             CurrentPath = dirInfo.Parent.FullName;
-
                         }
                         else
                         {
@@ -120,7 +119,6 @@ namespace DOSz
                     }
                 }
             }
-
         }
         //показ файлов
         private void ShowFilesInCatalog() { }
