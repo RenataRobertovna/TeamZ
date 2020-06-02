@@ -8,6 +8,7 @@ namespace DOSz
     {
         static void Main(string[] args)
         {
+            /*
             DriveInfo[] drives = DriveInfo.GetDrives();
             foreach (DriveInfo drive in drives) 
             {
@@ -23,7 +24,8 @@ namespace DOSz
                 }
                 WriteLine();
             }
-        DirectoryInformation dirInfo = new DirectoryInformation();
+            */
+            DirectoryInformation dirInfo = new DirectoryInformation();
             while (true)
             {
                 dirInfo.ShowCurrentCatalogs();

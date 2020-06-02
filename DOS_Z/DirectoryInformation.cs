@@ -11,11 +11,13 @@ namespace DOSz
         private List<string> files;
         private List<string> catalogsName;
         private List<string> filesName;
+        private List<string> message_cash;
         private string CurrentPath; // текущий путь
         private readonly string RootPath; // самый старший путь
         private DriveInfo[] drivers; // список устройств
         public DirectoryInformation()
         {
+            message_cash = new List<string>();
             catalogs = new List<string>();
             files = new List<string>();
             catalogsName = new List<string>();
@@ -60,12 +62,21 @@ namespace DOSz
                 WriteLine($"{i + 1}. - {filesName[i]}");
             }
             WriteLine();
+
+            for(int i = 0; i < message_cash.Count; i++)
+            {
+                WriteLine(message_cash[i]);
+
+            }
+            message_cash.Clear();
             DirectoryInfo dirInfo = new DirectoryInfo(CurrentPath);
 
             while (true)
             {
+                message_cash.Add("Жду команду");
                 WriteLine("Жду команду");
                 string command = ReadLine();
+                message_cash.Add(command);
                 try
                 {
                     int numberFolder = Convert.ToInt32(command);
@@ -87,6 +98,7 @@ namespace DOSz
                             CurrentPath = catalogs[numberFolder - 1];
                         }
                     }
+                    message_cash.Clear();
                     Directories();
                     break;
                 }
@@ -102,6 +114,9 @@ namespace DOSz
                         FileStream fs = myFile.Create();
                         fs.Close();
                         WriteLine("Файл создан.");
+                        message_cash.Add("Файл создан.");
+                        Directories();
+                        return;
                     }
                     else if (command.Contains("folder"))
                     {
@@ -109,13 +124,17 @@ namespace DOSz
                         DirectoryInfo dirInfo1 = new DirectoryInfo(CurrentPath);
                         if (dirInfo1.Exists)
                         {
-                            dirInfo1.CreateSubdirectory(CurrentPath + @"\" + nameNewFolder);
+                            dirInfo1.CreateSubdirectory(@nameNewFolder);
                             WriteLine("Папка создана.");
+                            message_cash.Add("Папка создана.");
                         }
+                        Directories();
+                        return;
                     }
                     else
                     {
                         WriteLine("Неправильная команда.");
+                        message_cash.Add("Неправильная команда.");
                     }
                 }
             }
