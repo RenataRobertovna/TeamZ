@@ -60,13 +60,6 @@ namespace DOSz
                     WriteLine($" - {catalogsName[i]} ");
                 }
             }
-            //                    ТО ЖЕ САМОЕ, ЧТО И СНИЗУ
-            /*
-            foreach (KeyValuePair<int, string> keyValue in catalogsName)
-            {
-                WriteLine($"{keyValue.Key}. - {keyValue.Value}");
-            }
-            */
             WriteLine();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             WriteLine("--------------Файлы--------------");
@@ -88,17 +81,14 @@ namespace DOSz
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     WriteLine($" - {filesName[i]}");
                 }
-                
             }
             WriteLine();
-
             for(int i = 0; i < message_cash.Count; i++)
             {
                 WriteLine(message_cash[i]);
             }
             message_cash.Clear();
             DirectoryInfo dirInfo = new DirectoryInfo(CurrentPath);
-
             while (true)
             {
                 message_cash.Add("Жду команду");
@@ -159,8 +149,7 @@ namespace DOSz
                             greenNames.Add(new DirectoryInfo(CurrentPath + @"\" + nameNewFolder).Name);
                             Directories(previousPath);
                             return;
-                        }
-                        
+                        }        
                     }
                     else
                     {
