@@ -57,7 +57,8 @@ namespace DOSz
                 string fileName = "";
                 bool fold = false;
                 bool file = false;
-                if (i < catalogsName.Count) {
+                if (i < catalogsName.Count)
+                {
                     fold = true;
                     folderName = catalogsName[i];
                     if (folderName.Length >= 20)
@@ -136,7 +137,6 @@ namespace DOSz
             }
             message_cash.Clear();
             DirectoryInfo dirInfo = new DirectoryInfo(CurrentPath);
-
             while (true)
             {
                 message_cash.Add("Жду команду");
@@ -210,7 +210,7 @@ namespace DOSz
                     WriteLine("==========Подсказка==============\n" +
                               "create file/folder <наз-е файла> \n" +
                               "delete file/folder <номер> \n" +
-                              "move   file/folder <номер> \n" + 
+                              "move   file/folder <номер> \n" +
                               "copy   file        <номер> \n" +
                               "insert - вставить file/folder \n" +
                               "Для перехода на след каталог\n" +
@@ -220,8 +220,7 @@ namespace DOSz
                 }
                 else if (command.Contains("move"))
                 {
-                    
-                    if(command.Contains("folder"))
+                    if (command.Contains("folder"))
                     {
                         int numberFolder = Convert.ToInt32(command.Substring(12));
                         if (catalogs[numberFolder - 1] != null)
@@ -235,7 +234,6 @@ namespace DOSz
                     }
                     else if (command.Contains("file"))
                     {
-                        // move file 7
                         int numberFile = Convert.ToInt32(command.Substring(10));
                         if (files[numberFile - 1] != null)
                         {
@@ -247,7 +245,7 @@ namespace DOSz
                         }
                     }
                 }
-                else if(command.Contains("insert"))
+                else if (command.Contains("insert"))
                 {
                     FileInfo fileInf = new FileInfo(CopiedPath);
                     if (fileInf.Exists)
@@ -274,6 +272,47 @@ namespace DOSz
                             CopiedName = "";
                             Directories(previousPath);
                             return;
+                        }
+                    }
+                }
+                   else if (command.Contains("delete"))
+                {
+                    if (command.Contains("file"))
+                    {
+                        // command = delete file 5444
+                        int numberFile = Convert.ToInt32(command.Substring(12));
+                        if (files[numberFile-1] != null)
+                        {
+                            FileInfo fileInf = new FileInfo(files[numberFile-1]);
+                            if (fileInf.Exists)
+                            {
+                                fileInf.Delete();
+                                WriteLine("Файл удален успешно!");
+                                message_cash.Add("Файл удален успешно!");
+                                Directories(previousPath);
+                                return;
+                            }
+                        }
+                    }
+                    else if (command.Contains("folder"))
+                    {
+                        int numberFolder = Convert.ToInt32(command.Substring(14));
+                        if(catalogs[numberFolder-1] != null)
+                        {
+                            try
+                            {
+                                DirectoryInfo dirInfo1 = new DirectoryInfo(catalogs[numberFolder - 1]);
+                                dirInfo1.Delete(true);
+                                WriteLine("Каталог удален");
+                                message_cash.Add("Каталог удален");
+                                Directories(previousPath);
+                                return;
+
+                            }
+                            catch (Exception ex)
+                            {
+                                WriteLine(ex.Message);
+                            }
                         }
                     }
                 }
