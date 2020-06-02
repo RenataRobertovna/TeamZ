@@ -24,7 +24,6 @@ namespace DOSz
                 }
                 WriteLine();
             }
-<<<<<<< HEAD
             FileInfo fileInf = new FileInfo("c:\folder");
             // fileInf = null
             FileInfo fileInf2 = new FileInfo("c:\folder.txt");
@@ -34,9 +33,7 @@ namespace DOSz
                 Console.WriteLine("Время создания: {0}", fileInf.CreationTime);
                 Console.WriteLine("Размер: {0}", fileInf.Length);
             }
-=======
             */
->>>>>>> master
             DirectoryInformation dirInfo = new DirectoryInformation();
             while (true)
             {

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using static System.Console;
 namespace DOSz
 {
     class DirectoryInformation
-    {   //Используем список
+    {   
+        //Используем список
         private List<string> catalogs;
         private List<string> files;
         private List<string> catalogsName;
@@ -33,9 +35,14 @@ namespace DOSz
         {
             string previousPath = CurrentPath;
             Console.Clear();
-            Write($"Текущая директория: ---> ");
-            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Write("{0, -45}", "Текущая директория: ----------------------> ");
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
             WriteLine($"{ CurrentPath }");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Write("{0, -45}", "Текущий скопированный/вырезанный путь: ---> ");
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            WriteLine($"{ CopiedPath }");
             Console.ResetColor();
             WriteLine();
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -122,51 +129,7 @@ namespace DOSz
                 }
             }
             Console.ForegroundColor = ConsoleColor.Cyan;
-            /*
             WriteLine();
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            for (int i = 0; i < catalogsName.Count; i++)
-            {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Write($"{i + 1}.");
-                if (greenNames.Contains(catalogsName[i]))
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Write($" - {catalogsName[i]} ");
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    WriteLine($" <---- Созданная папка");
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    WriteLine($" - {catalogsName[i]} ");
-                }
-            }
-            WriteLine();
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            WriteLine("--------------Файлы--------------");
-            WriteLine();
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            for (int i = 0; i < filesName.Count; i++)
-            {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Write($"{i + 1}.");
-                if (greenNames.Contains(filesName[i]))
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Write($" - {filesName[i]} ");
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    WriteLine($" <---- Созданный файл");
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    WriteLine($" - {filesName[i]}");
-                }
-            }
-            */
-            WriteLine();
-
             for (int i = 0; i < message_cash.Count; i++)
             {
                 WriteLine(message_cash[i]);
@@ -265,6 +228,9 @@ namespace DOSz
                         {
                             CopiedPath = catalogs[numberFolder - 1];
                             CopiedName = catalogsName[numberFolder - 1];
+                            greenNames.Add(CopiedName);
+                            Directories(previousPath);
+                            return;
                         }
                     }
                     else if (command.Contains("file"))
@@ -275,28 +241,25 @@ namespace DOSz
                         {
                             CopiedPath = files[numberFile - 1];
                             CopiedName = filesName[numberFile - 1];
+                            greenNames.Add(CopiedName);
+                            Directories(previousPath);
+                            return;
                         }
                     }
                 }
                 else if(command.Contains("insert"))
                 {
-                    /*
-                    string path = @"C:\apache\hta.txt";
-                    string newPath = @"C:\SomeDir\hta.txt";
-                    FileInfo fileInf = new FileInfo(path);
-                    if (fileInf.Exists)
-                    {
-                        fileInf.MoveTo(newPath);       
-                    // альтернатива с помощью класса File
-                    // File.Move(path, newPath);
-                    }
-
-                    */
                     FileInfo fileInf = new FileInfo(CopiedPath);
                     if (fileInf.Exists)
                     {
                         fileInf.MoveTo(CurrentPath + @"\" + CopiedName);
                         WriteLine("Файл перемещен успешно.");
+                        message_cash.Add("Файл перемещен успешно.");
+                        greenNames.Add(CopiedName);
+                        Directories(previousPath);
+                        CopiedPath = "";
+                        CopiedName = "";
+                        return;
                     }
                     else
                     {
@@ -305,6 +268,12 @@ namespace DOSz
                         {
                             dirInfo1.MoveTo(CurrentPath + @"\" + CopiedName);
                             WriteLine("Папка перемещена успешно.");
+                            message_cash.Add("Папка перемещена успешно.");
+                            greenNames.Add(CopiedName);
+                            CopiedPath = "";
+                            CopiedName = "";
+                            Directories(previousPath);
+                            return;
                         }
                     }
                 }
