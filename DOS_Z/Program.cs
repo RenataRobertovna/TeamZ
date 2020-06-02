@@ -23,7 +23,16 @@ namespace DOSz
                 }
                 WriteLine();
             }
-        DirectoryInformation dirInfo = new DirectoryInformation();
+            FileInfo fileInf = new FileInfo("c:\folder");
+            // fileInf = null
+            FileInfo fileInf2 = new FileInfo("c:\folder.txt");
+            if (fileInf.Exists)
+            {
+                Console.WriteLine("Имя файла: {0}", fileInf.Name);
+                Console.WriteLine("Время создания: {0}", fileInf.CreationTime);
+                Console.WriteLine("Размер: {0}", fileInf.Length);
+            }
+            DirectoryInformation dirInfo = new DirectoryInformation();
             while (true)
             {
                 dirInfo.ShowCurrentCatalogs();
