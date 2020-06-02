@@ -40,7 +40,87 @@ namespace DOSz
             WriteLine($"{0}. - НАЗАД");
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            WriteLine("--------------Каталоги--------------");
+            WriteLine("\t\t{0}\t\t\t\t\t{1}", "Каталоги", "Файлы");
+            WriteLine();
+            for (int i = 0; i < catalogsName.Count || i < filesName.Count; i++)
+            {
+                string folderName = "";
+                string fileName = "";
+                bool fold = false;
+                bool file = false;
+                if (i < catalogsName.Count) {
+                    fold = true;
+                    folderName = catalogsName[i];
+                    if (folderName.Length >= 20)
+                    {
+                        folderName = folderName.Substring(0, 20);
+                    }
+                }
+                if (i < filesName.Count)
+                {
+                    file = true;
+                    fileName = filesName[i];
+                    if (fileName.Length >= 20)
+                    {
+                        fileName = fileName.Substring(0, 20);
+                    }
+                }
+                if (fold && file)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Write("{0, -5}", (i + 1).ToString() + ".");
+                    if (greenNames.Contains(folderName))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                    }
+                    Write("{0, -20}\t\t\t", folderName);
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Write("{0, -5}", (i + 1).ToString() + ".");
+                    if (greenNames.Contains(fileName))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                    }
+                    WriteLine("{0, -20}", fileName);
+                }
+                else if (fold && !file)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Write("{0, -5}", (i + 1).ToString() + ".");
+                    if (greenNames.Contains(folderName))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                    }
+                    WriteLine("{0, -20}\t\t\t", folderName);
+                }
+                else if (!fold && file)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Write("{0, -5}", (i + 1).ToString() + ".");
+                    if (greenNames.Contains(fileName))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                    }
+                    WriteLine("{0, -20}", fileName);
+                }
+            }
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            /*
             WriteLine();
             Console.ForegroundColor = ConsoleColor.Cyan;
             for (int i = 0; i < catalogsName.Count; i++)
@@ -60,13 +140,6 @@ namespace DOSz
                     WriteLine($" - {catalogsName[i]} ");
                 }
             }
-            //                    ТО ЖЕ САМОЕ, ЧТО И СНИЗУ
-            /*
-            foreach (KeyValuePair<int, string> keyValue in catalogsName)
-            {
-                WriteLine($"{keyValue.Key}. - {keyValue.Value}");
-            }
-            */
             WriteLine();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             WriteLine("--------------Файлы--------------");
@@ -88,8 +161,8 @@ namespace DOSz
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     WriteLine($" - {filesName[i]}");
                 }
-                
             }
+            */
             WriteLine();
 
             for(int i = 0; i < message_cash.Count; i++)
