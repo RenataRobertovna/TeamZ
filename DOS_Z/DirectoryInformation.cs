@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using static System.Console;
@@ -12,11 +11,13 @@ namespace DOSz
         private List<string> catalogsName;
         private List<string> filesName;
         private List<string> message_cash;
+        private List<string> greenNames;
         private string CurrentPath; // текущий путь
         private readonly string RootPath; // самый старший путь
         private DriveInfo[] drivers; // список устройств
         public DirectoryInformation()
         {
+            greenNames = new List<string>();
             message_cash = new List<string>();
             catalogs = new List<string>();
             files = new List<string>();
@@ -28,6 +29,7 @@ namespace DOSz
         }
         public void ShowCurrentCatalogs() //показ каталога
         {
+            string previousPath = CurrentPath;
             Console.Clear();
             Write($"Текущая директория: ---> ");
             Console.ForegroundColor = ConsoleColor.Magenta;
@@ -43,7 +45,20 @@ namespace DOSz
             Console.ForegroundColor = ConsoleColor.Cyan;
             for (int i = 0; i < catalogsName.Count; i++)
             {
-                WriteLine($"{i + 1}. - {catalogsName[i]}");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Write($"{i + 1}.");
+                if (greenNames.Contains(catalogsName[i]))
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Write($" - {catalogsName[i]} ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    WriteLine($" <---- Созданная папка");
+                }
+                else 
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    WriteLine($" - {catalogsName[i]} ");
+                }
             }
             //                    ТО ЖЕ САМОЕ, ЧТО И СНИЗУ
             /*
@@ -59,14 +74,27 @@ namespace DOSz
             Console.ForegroundColor = ConsoleColor.Cyan;
             for (int i = 0; i < filesName.Count; i++)
             {
-                WriteLine($"{i + 1}. - {filesName[i]}");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Write($"{i + 1}.");
+                if (greenNames.Contains(filesName[i]))
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Write($" - {filesName[i]} ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    WriteLine($" <---- Созданный файл");
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    WriteLine($" - {filesName[i]}");
+                }
+                
             }
             WriteLine();
 
             for(int i = 0; i < message_cash.Count; i++)
             {
                 WriteLine(message_cash[i]);
-
             }
             message_cash.Clear();
             DirectoryInfo dirInfo = new DirectoryInfo(CurrentPath);
@@ -99,7 +127,7 @@ namespace DOSz
                         }
                     }
                     message_cash.Clear();
-                    Directories();
+                    Directories(previousPath);
                     break;
                 }
                 catch (System.FormatException)
@@ -115,7 +143,8 @@ namespace DOSz
                         fs.Close();
                         WriteLine("Файл создан.");
                         message_cash.Add("Файл создан.");
-                        Directories();
+                        greenNames.Add(myFile.Name);
+                        Directories(previousPath);
                         return;
                     }
                     else if (command.Contains("folder"))
@@ -127,9 +156,11 @@ namespace DOSz
                             dirInfo1.CreateSubdirectory(@nameNewFolder);
                             WriteLine("Папка создана.");
                             message_cash.Add("Папка создана.");
+                            greenNames.Add(new DirectoryInfo(CurrentPath + @"\" + nameNewFolder).Name);
+                            Directories(previousPath);
+                            return;
                         }
-                        Directories();
-                        return;
+                        
                     }
                     else
                     {
@@ -143,12 +174,15 @@ namespace DOSz
         private void ShowFilesInCatalog() { }
         //переход в следующий каталог
         public void ChangeCurrentCatalog() { }
-        private void Directories()
+        private void Directories(string previousPath)
         {
             try
             {
                 if (!CurrentPath.Equals(RootPath))
                 {
+                    if (!CurrentPath.Equals(previousPath)) {
+                        greenNames.Clear();
+                    }
                     ClearLists();
                     string[] dirs = Directory.GetDirectories(CurrentPath);
                     string[] files = Directory.GetFiles(CurrentPath);
