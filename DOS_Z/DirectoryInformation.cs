@@ -257,7 +257,6 @@ namespace DOSz
                 }
                 else if (command.Contains("move"))
                 {
-                    
                     if(command.Contains("folder"))
                     {
                         int numberFolder = Convert.ToInt32(command.Substring(12));
