@@ -12,6 +12,8 @@ namespace DOSz
         private List<string> filesName;
         private List<string> message_cash;
         private List<string> greenNames;
+        private string CopiedPath;
+        private string CopiedName;
         private string CurrentPath; // текущий путь
         private readonly string RootPath; // самый старший путь
         private DriveInfo[] drivers; // список устройств
@@ -134,7 +136,7 @@ namespace DOSz
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     WriteLine($" <---- Созданная папка");
                 }
-                else 
+                else
                 {
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     WriteLine($" - {catalogsName[i]} ");
@@ -165,7 +167,7 @@ namespace DOSz
             */
             WriteLine();
 
-            for(int i = 0; i < message_cash.Count; i++)
+            for (int i = 0; i < message_cash.Count; i++)
             {
                 WriteLine(message_cash[i]);
             }
@@ -233,7 +235,6 @@ namespace DOSz
                             Directories(previousPath);
                             return;
                         }
-                        
                     }
                     else
                     {
@@ -246,25 +247,77 @@ namespace DOSz
                     WriteLine("==========Подсказка==============\n" +
                               "create file/folder <наз-е файла> \n" +
                               "delete file/folder <номер> \n" +
-                              "copy file/folder <номер>  \n" +
+                              "move   file/folder <номер> \n" + 
+                              "copy   file        <номер> \n" +
+                              "insert - вставить file/folder \n" +
                               "Для перехода на след каталог\n" +
-                              "нужно ввести номер каталога. \n" +
+                              "нужно ввести номер каталога.\n" +
                               "(0 - перейти в родительский каталог)\n" +
                               "=================================");
                 }
+                else if (command.Contains("move"))
+                {
+                    
+                    if(command.Contains("folder"))
+                    {
+                        int numberFolder = Convert.ToInt32(command.Substring(12));
+                        if (catalogs[numberFolder - 1] != null)
+                        {
+                            CopiedPath = catalogs[numberFolder - 1];
+                            CopiedName = catalogsName[numberFolder - 1];
+                        }
+                    }
+                    else if (command.Contains("file"))
+                    {
+                        // move file 7
+                        int numberFile = Convert.ToInt32(command.Substring(10));
+                        if (files[numberFile - 1] != null)
+                        {
+                            CopiedPath = files[numberFile - 1];
+                            CopiedName = filesName[numberFile - 1];
+                        }
+                    }
+                }
+                else if(command.Contains("insert"))
+                {
+                    /*
+                    string path = @"C:\apache\hta.txt";
+                    string newPath = @"C:\SomeDir\hta.txt";
+                    FileInfo fileInf = new FileInfo(path);
+                    if (fileInf.Exists)
+                    {
+                        fileInf.MoveTo(newPath);       
+                    // альтернатива с помощью класса File
+                    // File.Move(path, newPath);
+                    }
+
+                    */
+                    FileInfo fileInf = new FileInfo(CopiedPath);
+                    if (fileInf.Exists)
+                    {
+                        fileInf.MoveTo(CurrentPath + @"\" + CopiedName);
+                        WriteLine("Файл перемещен успешно.");
+                    }
+                    else
+                    {
+                        DirectoryInfo dirInfo1 = new DirectoryInfo(CopiedPath);
+                        if (dirInfo1.Exists && Directory.Exists(CurrentPath + @"\" + CopiedName) == false)
+                        {
+                            dirInfo1.MoveTo(CurrentPath + @"\" + CopiedName);
+                            WriteLine("Папка перемещена успешно.");
+                        }
+                    }
+                }
             }
         }
-        //показ файлов
-        private void ShowFilesInCatalog() { }
-        //переход в следующий каталог
-        public void ChangeCurrentCatalog() { }
         private void Directories(string previousPath)
         {
             try
             {
                 if (!CurrentPath.Equals(RootPath))
                 {
-                    if (!CurrentPath.Equals(previousPath)) {
+                    if (!CurrentPath.Equals(previousPath))
+                    {
                         greenNames.Clear();
                     }
                     ClearLists();
