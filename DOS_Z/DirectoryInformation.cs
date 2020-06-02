@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.CompilerServices;
 using static System.Console;
 namespace DOSz
 {
@@ -14,6 +13,7 @@ namespace DOSz
         private List<string> filesName;
         private List<string> message_cash;
         private List<string> greenNames;
+        private bool isCopied;
         private string CopiedPath;
         private string CopiedName;
         private string CurrentPath; // текущий путь
@@ -21,6 +21,7 @@ namespace DOSz
         private DriveInfo[] drivers; // список устройств
         public DirectoryInformation()
         {
+            isCopied = false;
             greenNames = new List<string>();
             message_cash = new List<string>();
             catalogs = new List<string>();
@@ -141,8 +142,8 @@ namespace DOSz
             DirectoryInfo dirInfo = new DirectoryInfo(CurrentPath);
             while (true)
             {
-                message_cash.Add("Жду команду");
-                WriteLine("Жду команду");
+                message_cash.Add("Жду команду (help - для просмотра доступных команд)");
+                WriteLine("Жду команду (help - для просмотра доступных команд)");
                 string command = ReadLine();
                 message_cash.Add(command);
                 try
@@ -161,9 +162,13 @@ namespace DOSz
                     }
                     else
                     {
-                        if (catalogs[numberFolder - 1] != null)
+                        if (numberFolder -1 <= catalogs.Count)
                         {
                             CurrentPath = catalogs[numberFolder - 1];
+                        }
+                        else
+                        {
+                            WriteLine("Несуществующий порядковый номер файла/каталога");
                         }
                     }
                     message_cash.Clear();
@@ -225,65 +230,92 @@ namespace DOSz
                     if (command.Contains("folder"))
                     {
                         int numberFolder = Convert.ToInt32(command.Substring(12));
-                        if (catalogs[numberFolder - 1] != null)
+                        if (numberFolder - 1 <= catalogs.Count)
                         {
                             CopiedPath = catalogs[numberFolder - 1];
                             CopiedName = catalogsName[numberFolder - 1];
                             greenNames.Add(CopiedName);
                             Directories(previousPath);
+                            isCopied = false;
                             return;
+                        }
+                        else
+                        {
+                            WriteLine("Несуществующий порядковый номер файла/каталога");
                         }
                     }
                     else if (command.Contains("file"))
                     {
                         int numberFile = Convert.ToInt32(command.Substring(10));
-                        if (files[numberFile - 1] != null)
+                        if (numberFile - 1 <= files.Count)
                         {
                             CopiedPath = files[numberFile - 1];
                             CopiedName = filesName[numberFile - 1];
                             greenNames.Add(CopiedName);
                             Directories(previousPath);
+                            isCopied = false;
                             return;
+                        }
+                        else
+                        {
+                            WriteLine("Несуществующий порядковый номер файла/каталога");
                         }
                     }
                 }
                 else if (command.Contains("insert"))
                 {
-                    FileInfo fileInf = new FileInfo(CopiedPath);
-                    if (fileInf.Exists)
+                    
+                    if (!isCopied)
                     {
-                        fileInf.MoveTo(CurrentPath + @"\" + CopiedName);
-                        WriteLine("Файл перемещен успешно.");
-                        message_cash.Add("Файл перемещен успешно.");
-                        greenNames.Add(CopiedName);
-                        Directories(previousPath);
-                        CopiedPath = "";
-                        CopiedName = "";
-                        return;
+                        FileInfo fileInf = new FileInfo(CopiedPath);
+                        if (fileInf.Exists)
+                        {
+                            fileInf.MoveTo(CurrentPath + @"\" + CopiedName);
+                            WriteLine("Файл перемещен успешно.");
+                            message_cash.Add("Файл перемещен успешно.");
+                            greenNames.Add(CopiedName);
+                            Directories(previousPath);
+                            CopiedPath = "";
+                            CopiedName = "";
+                            return;
+                        }
+                        else
+                        {
+                            DirectoryInfo dirInfo1 = new DirectoryInfo(CopiedPath);
+                            if (dirInfo1.Exists && Directory.Exists(CurrentPath + @"\" + CopiedName) == false)
+                            {
+                                dirInfo1.MoveTo(CurrentPath + @"\" + CopiedName);
+                                WriteLine("Папка перемещена успешно.");
+                                message_cash.Add("Папка перемещена успешно.");
+                                greenNames.Add(CopiedName);
+                                CopiedPath = "";
+                                CopiedName = "";
+                                Directories(previousPath);
+                                return;
+                            }
+                        }
                     }
                     else
                     {
-                        DirectoryInfo dirInfo1 = new DirectoryInfo(CopiedPath);
-                        if (dirInfo1.Exists && Directory.Exists(CurrentPath + @"\" + CopiedName) == false)
+                        FileInfo fileInf1 = new FileInfo(CopiedPath);
+                        if (fileInf1.Exists)
                         {
-                            dirInfo1.MoveTo(CurrentPath + @"\" + CopiedName);
-                            WriteLine("Папка перемещена успешно.");
-                            message_cash.Add("Папка перемещена успешно.");
+                            fileInf1.CopyTo(CurrentPath + @"\" + CopiedName, true);
+                            WriteLine("Файл успешно вставлен.");
+                            message_cash.Add("Файл успешно вставлен.");
                             greenNames.Add(CopiedName);
-                            CopiedPath = "";
-                            CopiedName = "";
                             Directories(previousPath);
                             return;
                         }
                     }
                 }
-                   else if (command.Contains("delete"))
+                else if (command.Contains("delete"))
                 {
                     if (command.Contains("file"))
                     {
                         // command = delete file 5444
                         int numberFile = Convert.ToInt32(command.Substring(12));
-                        if (files[numberFile-1] != null)
+                        if (numberFile -1 <= files.Count)
                         {
                             FileInfo fileInf = new FileInfo(files[numberFile-1]);
                             if (fileInf.Exists)
@@ -295,11 +327,15 @@ namespace DOSz
                                 return;
                             }
                         }
+                        else
+                        {
+                            WriteLine("Несуществующий порядковый номер файла/каталога");
+                        }
                     }
                     else if (command.Contains("folder"))
                     {
                         int numberFolder = Convert.ToInt32(command.Substring(14));
-                        if(catalogs[numberFolder-1] != null)
+                        if(numberFolder - 1 <= catalogs.Count)
                         {
                             try
                             {
@@ -315,6 +351,36 @@ namespace DOSz
                             {
                                 WriteLine(ex.Message);
                             }
+                        }
+                        else
+                        {
+                            WriteLine("Несуществующий порядковый номер файла/каталога");
+                        }
+                    }
+                }
+                else if (command.Contains("copy"))
+                {
+                    if (command.Contains("folder"))
+                    {
+                        WriteLine("Нельзя копировать папку.");
+                    }
+                    else if (command.Contains("file"))
+                    {
+                        int numberFile = Convert.ToInt32(command.Substring(10));
+                        if(numberFile - 1 <= filesName.Count)
+                        {
+                            CopiedPath = files[numberFile - 1];
+                            CopiedName = filesName[numberFile - 1];
+                            greenNames.Add(CopiedName);
+                            isCopied = true;
+                            WriteLine("Файл успешно скопирован.");
+                            message_cash.Add("Файл успешно скопирован.");
+                            Directories(previousPath);
+                            return;
+                        }
+                        else
+                        {
+                            WriteLine("Несуществующий порядковый номер файла/каталога");
                         }
                     }
                 }
