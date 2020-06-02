@@ -12,8 +12,11 @@ namespace DOSz
         private List<string> filesName;
         private List<string> message_cash;
         private List<string> greenNames;
+<<<<<<< HEAD
         private string CopiedPath;
         private string CopiedName;
+=======
+>>>>>>> master
         private string CurrentPath; // текущий путь
         private readonly string RootPath; // самый старший путь
         private DriveInfo[] drivers; // список устройств
@@ -56,19 +59,25 @@ namespace DOSz
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     WriteLine($" <---- Созданная папка");
                 }
+<<<<<<< HEAD
                 else
+=======
+                else 
+>>>>>>> master
                 {
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     WriteLine($" - {catalogsName[i]} ");
                 }
+<<<<<<< HEAD
             }
             //                    ТО ЖЕ САМОЕ, ЧТО И СНИЗУ
             /*
             foreach (KeyValuePair<int, string> keyValue in catalogsName)
             {
                 WriteLine($"{keyValue.Key}. - {keyValue.Value}");
+=======
+>>>>>>> master
             }
-            */
             WriteLine();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             WriteLine("--------------Файлы--------------");
@@ -90,17 +99,22 @@ namespace DOSz
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     WriteLine($" - {filesName[i]}");
                 }
+<<<<<<< HEAD
 
             }
             WriteLine();
 
             for (int i = 0; i < message_cash.Count; i++)
+=======
+            }
+            WriteLine();
+            for(int i = 0; i < message_cash.Count; i++)
+>>>>>>> master
             {
                 WriteLine(message_cash[i]);
             }
             message_cash.Clear();
             DirectoryInfo dirInfo = new DirectoryInfo(CurrentPath);
-
             while (true)
             {
                 message_cash.Add("Жду команду");
@@ -161,7 +175,11 @@ namespace DOSz
                             greenNames.Add(new DirectoryInfo(CurrentPath + @"\" + nameNewFolder).Name);
                             Directories(previousPath);
                             return;
+<<<<<<< HEAD
                         }
+=======
+                        }        
+>>>>>>> master
                     }
                     else
                     {
@@ -174,6 +192,7 @@ namespace DOSz
                     WriteLine("==========Подсказка==============\n" +
                               "create file/folder <наз-е файла> \n" +
                               "delete file/folder <номер> \n" +
+<<<<<<< HEAD
                               "move   file/folder <номер> \n" + 
                               "copy   file        <номер> \n" +
                               "insert - вставить file/folder \n" +
@@ -237,14 +256,33 @@ namespace DOSz
                 }
             }
         }
+=======
+                              "copy file <номер>  \n" +
+                              "move file/folder <номер> \n" +
+                              "Для перехода на след каталог\n" +
+                              "нужно ввести номер каталога. \n" +
+                              "(0 - перейти в родительский каталог)\n" +
+                              "=================================");
+                }
+            }
+        }
+        //показ файлов
+        private void ShowFilesInCatalog() { }
+        //переход в следующий каталог
+        public void ChangeCurrentCatalog() { }
+>>>>>>> master
         private void Directories(string previousPath)
         {
             try
             {
                 if (!CurrentPath.Equals(RootPath))
                 {
+<<<<<<< HEAD
                     if (!CurrentPath.Equals(previousPath))
                     {
+=======
+                    if (!CurrentPath.Equals(previousPath)) {
+>>>>>>> master
                         greenNames.Clear();
                     }
                     ClearLists();
