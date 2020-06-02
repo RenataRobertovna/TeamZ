@@ -173,7 +173,8 @@ namespace DOSz
                     WriteLine("==========Подсказка==============\n" +
                               "create file/folder <наз-е файла> \n" +
                               "delete file/folder <номер> \n" +
-                              "copy file/folder <номер>  \n" +
+                              "copy file <номер>  \n" +
+                              "move file/folder <номер> \n" +
                               "Для перехода на след каталог\n" +
                               "нужно ввести номер каталога. \n" +
                               "(0 - перейти в родительский каталог)\n" +
