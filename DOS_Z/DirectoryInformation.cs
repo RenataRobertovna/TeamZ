@@ -116,6 +116,8 @@ namespace DOSz
                 }
                 else if (!fold && file)
                 {
+                    Write("{0, -5}", "");
+                    Write("{0, 20}\t\t\t", "");
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Write("{0, -5}", (i + 1).ToString() + ".");
                     if (greenNames.Contains(fileName))
