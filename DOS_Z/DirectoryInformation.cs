@@ -5,20 +5,21 @@ using static System.Console;
 namespace DOSz
 {
     class DirectoryInformation
-    {   
+    {
         //Используем список
-        private List<string> catalogs;
-        private List<string> files;
-        private List<string> catalogsName;
-        private List<string> filesName;
-        private List<string> message_cash;
-        private List<string> greenNames;
-        private bool isCopied;
-        private string CopiedPath;
-        private string CopiedName;
-        private string CurrentPath; // текущий путь
-        private readonly string RootPath; // самый старший путь
-        private DriveInfo[] drivers; // список устройств
+        public List<string> catalogs { private set; get; }
+        public List<string> files { private set; get; }
+        public List<string> catalogsName { private set; get; }
+        public List<string> filesName { private set; get; }
+        public List<string> message_cash { private set; get; }
+        public List<string> greenNames { private set; get; }
+        public bool isCopied { private set; get; }
+        public string CopiedPath { private set; get; }
+        public string CopiedName { private set; get; }
+        public string CurrentPath { private set; get; } // текущий путь
+
+        private readonly string RootPath;   // самый старший путь
+        public DriveInfo[] drivers { private set; get; } // список устройств
         public DirectoryInformation()
         {
             isCopied = false;
@@ -32,7 +33,7 @@ namespace DOSz
             RootPath = "Список доступных дисков.";
             OriginDirictories();
         }
-        public void ShowCurrentCatalogs() //показ каталога
+        public void ShowCurrentCatalogs()               //показ каталога
         {
             string previousPath = CurrentPath;
             Console.Clear();
@@ -162,7 +163,7 @@ namespace DOSz
                     }
                     else
                     {
-                        if (numberFolder -1 <= catalogs.Count)
+                        if (numberFolder <= catalogs.Count)
                         {
                             CurrentPath = catalogs[numberFolder - 1];
                         }
@@ -230,7 +231,7 @@ namespace DOSz
                     if (command.Contains("folder"))
                     {
                         int numberFolder = Convert.ToInt32(command.Substring(12));
-                        if (numberFolder - 1 <= catalogs.Count)
+                        if (numberFolder <= catalogs.Count)
                         {
                             CopiedPath = catalogs[numberFolder - 1];
                             CopiedName = catalogsName[numberFolder - 1];
@@ -247,7 +248,7 @@ namespace DOSz
                     else if (command.Contains("file"))
                     {
                         int numberFile = Convert.ToInt32(command.Substring(10));
-                        if (numberFile - 1 <= files.Count)
+                        if (numberFile <= files.Count)
                         {
                             CopiedPath = files[numberFile - 1];
                             CopiedName = filesName[numberFile - 1];
@@ -264,9 +265,9 @@ namespace DOSz
                 }
                 else if (command.Contains("insert"))
                 {
-                    
                     if (!isCopied)
                     {
+                        if (CopiedPath == null) continue;
                         FileInfo fileInf = new FileInfo(CopiedPath);
                         if (fileInf.Exists)
                         {
@@ -305,6 +306,9 @@ namespace DOSz
                             message_cash.Add("Файл успешно вставлен.");
                             greenNames.Add(CopiedName);
                             Directories(previousPath);
+                            CopiedPath = "";
+                            CopiedName = "";
+                            isCopied = false;
                             return;
                         }
                     }
@@ -313,11 +317,10 @@ namespace DOSz
                 {
                     if (command.Contains("file"))
                     {
-                        // command = delete file 5444
                         int numberFile = Convert.ToInt32(command.Substring(12));
-                        if (numberFile -1 <= files.Count)
+                        if (numberFile <= files.Count)
                         {
-                            FileInfo fileInf = new FileInfo(files[numberFile-1]);
+                            FileInfo fileInf = new FileInfo(files[numberFile - 1]);
                             if (fileInf.Exists)
                             {
                                 fileInf.Delete();
@@ -335,7 +338,7 @@ namespace DOSz
                     else if (command.Contains("folder"))
                     {
                         int numberFolder = Convert.ToInt32(command.Substring(14));
-                        if(numberFolder - 1 <= catalogs.Count)
+                        if (numberFolder <= catalogs.Count)
                         {
                             try
                             {
@@ -367,7 +370,7 @@ namespace DOSz
                     else if (command.Contains("file"))
                     {
                         int numberFile = Convert.ToInt32(command.Substring(10));
-                        if(numberFile - 1 <= filesName.Count)
+                        if (numberFile <= files.Count)
                         {
                             CopiedPath = files[numberFile - 1];
                             CopiedName = filesName[numberFile - 1];
@@ -386,6 +389,7 @@ namespace DOSz
                 }
             }
         }
+
         private void Directories(string previousPath)
         {
             try
@@ -415,6 +419,137 @@ namespace DOSz
             }
             catch (UnauthorizedAccessException)
             { }
+        }
+        public bool DeleteFile(int numberFile, string previousPath)
+        {
+            FileInfo fileInf = new FileInfo(files[numberFile]);
+            if (fileInf.Exists)
+            {
+                fileInf.Delete();
+                Directories(previousPath);
+                return true;
+            }
+            return false;
+        }
+        public bool CreateFolder(string nameNewFolder, string previousPath)
+        {
+            DirectoryInfo dirInfo = new DirectoryInfo(CurrentPath);
+            if (dirInfo.Exists)
+            {
+                dirInfo.CreateSubdirectory(@nameNewFolder);
+                WriteLine("Папка создана.");
+                message_cash.Add("Папка создана.");
+                greenNames.Add(new DirectoryInfo(CurrentPath + @"\" + nameNewFolder).Name);
+                Directories(previousPath);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void CreateFile(string nameNewFile, string previousPath)
+        {
+            FileInfo myFile = new FileInfo(CurrentPath + @"\" + nameNewFile);
+            FileStream fs = myFile.Create();
+            fs.Close();
+            greenNames.Add(myFile.Name);
+            Directories(previousPath);
+        }
+        public void CopyFile(int numberFile)
+        {
+            if (numberFile <= filesName.Count)
+            {
+                CopiedPath = files[numberFile - 1];
+                CopiedName = filesName[numberFile - 1];
+                greenNames.Add(CopiedName);
+                isCopied = true;
+            }
+        }
+        public bool ChangeCatalog(int numberFolder, string previousPath)
+        {
+            DirectoryInfo dirInfo = new DirectoryInfo(CurrentPath);
+            if (numberFolder == 0)
+            {
+                if (dirInfo.Parent != null)
+                {
+                    CurrentPath = dirInfo.Parent.FullName;
+                }
+                else
+                {
+                    OriginDirictories();
+                }
+            }
+            else
+            {
+                if (numberFolder <= catalogs.Count)
+                {
+                    CurrentPath = catalogs[numberFolder - 1];
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            message_cash.Clear();
+            Directories(previousPath);
+            return true;
+        }
+        public bool InsertFileHere(string previousPath)
+        {
+            FileInfo fileInf = new FileInfo(CopiedPath);
+            if (fileInf.Exists)
+            {
+                fileInf.CopyTo(CurrentPath + @"\" + CopiedName, true);
+                greenNames.Add(CopiedName);
+                Directories(previousPath);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool MoveFolderHere(string previousPath)
+        {
+            DirectoryInfo dirInfo = new DirectoryInfo(CopiedPath);
+            if (dirInfo.Exists && Directory.Exists(CurrentPath + @"\" + CopiedName) == false)
+            {
+                dirInfo.MoveTo(CurrentPath + @"\" + CopiedName);
+                greenNames.Add(CopiedName);
+                CopiedPath = "";
+                CopiedName = "";
+                Directories(previousPath);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public void MoveFileHere(string previousPath)
+        {
+            FileInfo fileInf = new FileInfo(CopiedPath);
+            if (fileInf.Exists)
+            {
+                fileInf.MoveTo(CurrentPath + @"\" + CopiedName);
+                greenNames.Add(CopiedName);
+                Directories(previousPath);
+            }
+        }
+        public string GetHelpInfo()
+        {
+        return "==========Подсказка==============\n" +
+                "create file/folder <наз-е файла> \n" +
+                "delete file/folder <номер> \n" +
+                "move   file/folder <номер> \n" +
+                "copy   file        <номер> \n" +
+                "insert - вставить file/folder \n" +
+                "Для перехода на след каталог\n" +
+                "нужно ввести номер каталога.\n" +
+                "(0 - перейти в родительский каталог)\n" +
+                "=================================";
         }
         private void OriginDirictories()
         {
